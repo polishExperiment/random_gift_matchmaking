@@ -1,0 +1,4 @@
+--color
+--require rails_helper
+--require database_cleaner
+--format documentation
