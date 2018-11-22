@@ -14,6 +14,7 @@ gem 'bootstrap-sass'
 group :development, :test do
   gem 'byebug'
   gem 'pry-rails'
+  gem 'dotenv-rails'
 end
 
 group :development do
