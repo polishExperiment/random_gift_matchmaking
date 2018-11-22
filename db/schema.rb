@@ -26,5 +26,4 @@ ActiveRecord::Schema.define(version: 20161120152727) do
 
   add_index "users", ["user_id"], name: "index_users_on_user_id", using: :btree
 
-  add_foreign_key "users", "users"
 end

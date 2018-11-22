@@ -1,0 +1,7 @@
+<%= form_tag({controller: "home", action: "index"}, {method: "post", class: 'top-buffer'}) do %>
+  <div class='form-group'>
+    <label for="email">Adres e-mail</label>
+    <input type="email" class="form-control" id="email" placeholder="Podaj swój adres email" name="email">
+  </div>
+  <button type="submit" class="btn btn-success">Wyślij</button>
+<% end %>

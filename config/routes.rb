@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  root 'home#index'
+  root 'home#welcome'
 
-  get 'home', action: :index, controller: 'home'
+  post 'home', action: :index, controller: 'home'
+  get 'home', action: :index, controller: 'home', as: :index
+  get ':controller/:action/:id'
 end
