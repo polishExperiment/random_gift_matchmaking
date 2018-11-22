@@ -1,4 +1,4 @@
-bundle exec rails s
-bundle exec rake db:create
-bundle exec rake db:migrate
-bundle exec rake db:seed
+web: bundle exec rails s
+release: bundle exec rake db:create
+release: bundle exec rake db:migrate
+release: bundle exec rake db:seed
