@@ -11,7 +11,7 @@ class HomeController < ApplicationController
       flash[:notice] = 'Witaj ' + session[:user]['name']
     else
       if params[:email]
-        flash[:alert] = "#{params[:email]} nie może losować prezentów"
+        flash[:alert] = "#{params[:email]} nie może losować prezentów. Czy to na pewno poprawny adres?"
       end
       redirect_to root_path
       return
