@@ -23,13 +23,7 @@ class HomeController < ApplicationController
   def draw_lots
     drawnee = User.find params[:id]
 
-    list_of_drawns = User.joins(:drawnee)
-    list_of_users = User.where.not(id: params[:id])
-
-    list_to_draw_from = list_of_users - list_of_drawns - [drawnee.drawnee]
-
-    drawn = list_to_draw_from.sample(1)[0]
-    drawnee.drawn = drawn
+    drawnee.has_drawn = true
     drawnee.save
     flash[:notice] = 'Właśnie wyruszył do Ciebie mail z wylosowaną osobą'
     send_mail drawnee.email, drawnee.drawn.name
@@ -41,6 +35,11 @@ class HomeController < ApplicationController
     flash[:info] = 'Właśnie wyruszył do Ciebie mail z wylosowaną osobą'
     send_mail current_user.email, current_user.drawn.name
     redirect_to index_path
+  end
+
+  def logout
+    reset_session
+    redirect_to root_path
   end
 
   private
