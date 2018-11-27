@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   get 'home', action: :index, controller: 'home', as: :index
   get ':controller/:action/:id'
   get 'logout', action: :logout, controller: 'home'
+  get 'test', action: :test, controller: 'home'
 end

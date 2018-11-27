@@ -28,7 +28,7 @@ class HomeController < ApplicationController
 
     drawn = list_to_draw_from.sample(1)[0]
 
-    drawn = (list_to_draw_from - [drawn])[0] if list_to_draw_from.count <= 2 && drawn.drawn == drawnee
+    drawn = (list_to_draw_from - [drawn])[0] if list_to_draw_from.count == 2 && drawn.drawn
 
     drawnee.drawn = drawn
     drawnee.save
@@ -48,6 +48,18 @@ class HomeController < ApplicationController
   def logout
     reset_session
     redirect_to root_path
+  end
+
+  def test
+    for drawnee in User.all do
+      list_of_drawns = User.joins(:drawnee)
+      list_of_users = User.where.not(id: drawnee.id)
+      list_to_draw_from = list_of_users - list_of_drawns
+      drawn = list_to_draw_from.sample(1)[0]
+      drawn = (list_to_draw_from - [drawn])[0] if list_to_draw_from.count == 2 && drawn.drawn
+      drawnee.drawn = drawn
+      drawnee.save
+    end
   end
 
   private
