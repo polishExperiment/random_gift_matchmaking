@@ -19,7 +19,6 @@ ActiveRecord::Schema.define(version: 20161120152727) do
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
-    t.boolean  "has_drawn"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

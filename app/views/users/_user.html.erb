@@ -8,7 +8,7 @@
 
   <td>
     <% if (@current_user == user) %>
-      <% if user.has_drawn %>
+      <% if user.drawn %>
         <%= button_to 'Przypomnij mi',
                       {:controller => :home,
                        :action => :remind_me,
@@ -21,7 +21,7 @@
                       method: :get, class: 'btn btn-success' %>
       <% end %>
     <% else %>
-      <% if user.has_drawn %>
+      <% if user.drawn %>
         Oczywiście!
       <% else %>
         Jeszcze nie

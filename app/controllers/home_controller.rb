@@ -11,7 +11,7 @@ class HomeController < ApplicationController
       flash[:notice] = 'Witaj ' + session[:user]['name']
     else
       if params[:email]
-        flash[:alert] = "#{params[:email]} nie może losować prezentów. Czy to na pewno poprawny adres?"
+        flash[:alert] = "#{params[:email]} nie może losować prezentów. Może zapytaj Aliny, który z Twoich adresów bierze udział w losowaniu:)"
       end
       redirect_to root_path
       return
@@ -22,9 +22,17 @@ class HomeController < ApplicationController
 
   def draw_lots
     drawnee = User.find params[:id]
+    list_of_drawns = User.joins(:drawnee)
+    list_of_users = User.where.not(id: params[:id])
+    list_to_draw_from = list_of_users - list_of_drawns
 
-    drawnee.has_drawn = true
+    drawn = list_to_draw_from.sample(1)[0]
+
+    drawn = (list_to_draw_from - [drawn])[0] if list_to_draw_from.count <= 2 && drawn.drawn == drawnee
+
+    drawnee.drawn = drawn
     drawnee.save
+
     flash[:notice] = 'Właśnie wyruszył do Ciebie mail z wylosowaną osobą'
     send_mail drawnee.email, drawnee.drawn.name
     redirect_to home_path
